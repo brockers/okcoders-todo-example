@@ -18,6 +18,7 @@ var Todo = require('../models/todo');
 // Create
 router.post('/add', function(req,res){
     console.log("Create a new task in todo");
+    res.json({status: "SUCCESS"});
 });
 
 // Read
@@ -29,11 +30,13 @@ router.get('/all', function(req, res){
 // Update
 router.put('/:id', function(req,res){
     console.log("Update a task in todo");
+    res.json({status: "SUCCESS"});
 });
 
 // Delete
 router.delete('/:id', function(req,res){
     console.log("Delete a taks in todo");
+    res.json({status: "SUCCESS"});
 });
 
 module.exports = router;
