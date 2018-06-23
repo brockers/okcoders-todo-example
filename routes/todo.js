@@ -40,10 +40,30 @@ router.get('/all', function(req, res){
     });
 });
 
+// Finish task
+router.put('/complete/:id', function(req,res){
+    Todo.updateOne( {_id: req.params.id}, {done: true},  function(err, tsk){
+        if(err){
+            console.log("Unable to make update to " + req.params.id);
+            res.status(404);
+        } else {
+            res.json({status:"Task " + req.params.id +" marked complete"});
+        }
+    });
+});
+
 // Update
-router.put('/:id', function(req,res){
-    console.log("Update a task in todo");
-    res.json({status: "SUCCESS"});
+router.put('/:id', function(req, res){
+    // Double check req.body matches what we want.
+    Todo.updateOne( {_id: req.params.id}, req.body, function(err, tsk){
+        if(err){
+            console.log("Unable to make update to " + req.params.id);
+            console.log("JSON Body: " + req.body);
+            res.status(404);
+        } else {
+            res.json({status:"SUCCESS", message: tsk});
+        }
+    });
 });
 
 // Delete
